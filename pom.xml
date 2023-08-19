@@ -7,7 +7,7 @@
     <artifactId>YSJTHQ</artifactId>
     <version>3.0-SNAPSHOT</version>
     <modules>
-        <module>education-api</module>
+        <module>education-gateway</module>
         <module>education-service</module>
         <module>education-common</module>
     </modules>
@@ -22,7 +22,8 @@
     <properties>
         <hutool-version>5.5.8</hutool-version>
         <mybatis-plus-version>3.5.2</mybatis-plus-version>
-        <druid-spring-boot-version>1.2.8</druid-spring-boot-version>
+        <druid-spring-boot-version>1.1.9</druid-spring-boot-version>
+        <ysjt-version>3.0-SNAPSHOT</ysjt-version>
     </properties>
     <!--子类一定引入-->
     <dependencies>
@@ -63,6 +64,39 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.7.7</version>
+            </dependency>
+
+            <!--生成接口文档-->
+            <!-- https://doc.xiaominfo.com/knife4j/documentation/get_start.html-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>3.0.3</version>
+            </dependency>
+
+            <!--规范本地开发版本-->
+            <dependency>
+                <groupId>huangqi.education</groupId>
+                <artifactId>common-web</artifactId>
+                <version>3.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>huangqi.education</groupId>
+                <artifactId>common-mybatis-plus</artifactId>
+                <version>3.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>huangqi.education</groupId>
+                <artifactId>common-base</artifactId>
+                <version>3.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>huangqi.education</groupId>
+                <artifactId>common-redis</artifactId>
+                <version>3.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

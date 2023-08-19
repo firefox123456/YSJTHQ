@@ -34,11 +34,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
-        <!--如果你的项目使用的是bootstrap配置文件，那么需要加下spring-cloud-starter-bootstrap依赖，因为新的版本里面，把bootstrap已经摘出去了，单独成一派-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
         <!--服务注册-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -51,11 +46,74 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--如果你的项目使用的是bootstrap配置文件，那么需要加下spring-cloud-starter-bootstrap依赖，因为新的版本里面，把bootstrap已经摘出去了，单独成一派-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!--nacos配置中心 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
         <!--服务调用-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!--test测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+<!--    &lt;!&ndash;    统一配置测试开发生产环境&ndash;&gt;-->
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;开发环境&ndash;&gt;-->
+<!--            <id>dev</id>-->
+<!--            &lt;!&ndash; 加了这个，默认选中 &ndash;&gt;-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--            &lt;!&ndash;配置设置&ndash;&gt;-->
+<!--            <properties>-->
+<!--                <activatedProperties>dev</activatedProperties>-->
+<!--                <nacosAddress>http://localhost:8848/</nacosAddress>-->
+<!--                <nacosNamespace>ecbfa210-4cfc-4936-ab2c-0859af68d447</nacosNamespace>-->
+<!--                &lt;!&ndash;            <nacosGroup>nacos-group-${activatedProperties}</nacosGroup>&ndash;&gt;-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;测试环境&ndash;&gt;-->
+<!--            <id>test</id>-->
+<!--            &lt;!&ndash; 以下属性用于 bootstrap.yaml 文件中 可通过 @activatedProperties@ 获取配置的变量&ndash;&gt;-->
+<!--            <properties>-->
+<!--                <activatedProperties>test</activatedProperties>-->
+<!--                <nacosAddress>http://localhost:8848/</nacosAddress>-->
+<!--                <nacosNamespace>ec7384fa-af29-44ca-a3d5-81def60f5406</nacosNamespace>-->
+<!--                &lt;!&ndash;<nacosGroup>nacos-group-${activatedProperties}</nacosGroup>&ndash;&gt;-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        &lt;!&ndash;生产环境&ndash;&gt;-->
+<!--        <profile>-->
+<!--            <id>prod</id>-->
+<!--            <properties>-->
+<!--                <activatedProperties>prod</activatedProperties>-->
+<!--                <nacosAddress>http://localhost:8848/</nacosAddress>-->
+<!--                <nacosNamespace>33a42bd0-e959-407b-89f9-04eb82424e56</nacosNamespace>-->
+<!--                &lt;!&ndash;<nacosGroup>nacos-group-${activatedProperties}</nacosGroup>&ndash;&gt;-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
+<!--    <build>-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
+<!--    </build>-->
 </project>

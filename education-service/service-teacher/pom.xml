@@ -3,17 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>YSJTHQ</artifactId>
+        <artifactId>education-service</artifactId>
         <groupId>huangqi.education</groupId>
         <version>3.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>education-api</artifactId>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
+    <artifactId>service-teacher</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>teacher-boot</module>
+        <module>teacher-api</module>
+    </modules>
 </project>
