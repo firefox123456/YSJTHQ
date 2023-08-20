@@ -35,6 +35,12 @@
             <artifactId>teacher-api</artifactId>
             <version>${ysjt-version}</version>
         </dependency>
+
+<!--        &lt;!&ndash; SpringBoot Actuator &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
 

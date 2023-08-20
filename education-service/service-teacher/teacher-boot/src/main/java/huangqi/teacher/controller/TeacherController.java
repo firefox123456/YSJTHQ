@@ -6,6 +6,8 @@ import huangqi.base.result.ReturnDataFormat;
 import huangqi.teacher.entity.EduTeacher;
 import huangqi.teacher.entity.query.TeacherQuery;
 import huangqi.teacher.service.IEduTeacherService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -20,24 +22,29 @@ import java.util.List;
  * @author "黄骐"
  * @date 2023/08/19 21:04
  **/
+@Api("讲师管理")
 @RestController
 @RequestMapping("teacher")
 @Slf4j
 public class TeacherController {
 
+    @ApiOperation("接口测试")
     @GetMapping("test")
     String test(){
         return "hello word";
     }
+
     @Resource
     private IEduTeacherService iEduTeacherService;
 
+    @ApiOperation("查找所有讲师")
     @GetMapping("findAll")
     public ReturnDataFormat findAllTeacher() {
         List<EduTeacher> list = iEduTeacherService.list(null);
         return ReturnDataFormat.ok().data("list", list);
     }
 
+    @ApiOperation("通过讲师id逻辑删除记录")
     @DeleteMapping("delete/{id}")
     public ReturnDataFormat removeTeacher(@PathVariable String id) {
         boolean b = iEduTeacherService.removeById(id);
@@ -49,6 +56,7 @@ public class TeacherController {
      * 使用mpSerbice中的page方法
      * 返回page的值
      */
+    @ApiOperation("分页返回讲师数据")
     @GetMapping("{current}/{size}")
     ReturnDataFormat pageTeacher(@PathVariable Integer current,
                                  @PathVariable Integer size) {
@@ -71,6 +79,7 @@ public class TeacherController {
      * page对象
      * QueryWrapper对象
      */
+    @ApiOperation("条件查询+分页返回")
     @PostMapping("condition/{current}/{size}")
     ReturnDataFormat confitionPageTeacher(@PathVariable Integer current,
                                           @PathVariable Integer size,
@@ -117,6 +126,7 @@ public class TeacherController {
     /**
      * 添加讲师
      */
+    @ApiOperation("添加讲师")
     @PostMapping("/addTeacher")
     public ReturnDataFormat addTeacher(@RequestBody EduTeacher eduTeacher) {
 //        log.info(String.valueOf(eduTeacher));
@@ -127,6 +137,7 @@ public class TeacherController {
     /**
      * 根据id查询讲师
      */
+    @ApiOperation("根据id查询讲师数据")
     @GetMapping("queryTeacherById/{id}")
     public ReturnDataFormat queryTeacherById(@PathVariable String id) {
         EduTeacher byId = iEduTeacherService.getById(id);
@@ -136,6 +147,7 @@ public class TeacherController {
     /**
      * 讲师修改功能
      */
+    @ApiOperation("讲师修改接口")
     @PostMapping("updateTeacher")
     public ReturnDataFormat updateTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean b = iEduTeacherService.updateById(eduTeacher);

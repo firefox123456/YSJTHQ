@@ -1,7 +1,9 @@
 package huangqi.web.log;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.nacos.shaded.com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -82,13 +84,15 @@ public class HttpAspect {
         Object result = null;
         try {
             result = joinPoint.proceed();
-            map.put("response", JSON.toJSONString(result));
+//            map.put("response", JSONUtil.parse(result).toString());
+            map.put("response", JSONUtil.toJsonStr(result));
         } catch (Throwable throwable) {
             map.put("exception", ExceptionUtil.getRootCauseMessage(throwable));
             throw throwable;
         } finally {
             map.put("cost", System.currentTimeMillis() - start);
-            log.info(JSON.toJSONString(map));
+//            log.info(JSONUtil.parse(result).toString());
+            log.info(JSONUtil.toJsonStr(map));
         }
         return result;
     }
