@@ -1,22 +1,20 @@
 server:
-  port: 9527
+  port: 10000
 #  port: ${random.int[10000,20000]}
 spring:
   #  profiles:
   #    active: @activatedProperties@
   application:
-    name: nacos-yishi-gateway
+    name: nacos-yishi-user-service
   cloud:
-#    sentinel:
-#      datasource:
-#        ds2:
-#          nacos:
-#            dataType:
     nacos:
       config:
         server-addr: localhost:8848   #Nacos作为配置中心地址,选择spring.cloud.nacos.discovery.server-addr值
         file-extension: yaml #指定yml格式的配置
         namespace: d123851b-4d58-4f0e-8b7b-e17dd9aef918
+        # 共享配置的DataId，多个使用，分隔
+        # 越靠后，优先级越高
+        # .yaml后缀不能少，只支持yaml/properties
         shared-configs[0]:
           -dataId: nacos-yishi-mysql.yaml
           -refresh: true

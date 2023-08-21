@@ -8,9 +8,6 @@ spring:
     name: nacos-yishi-teacher-service
   cloud:
     nacos:
-      discovery:
-        server-addr: localhost:8848  #Nacos服务注册中心地址
-        namespace: d123851b-4d58-4f0e-8b7b-e17dd9aef918
       config:
         server-addr: localhost:8848   #Nacos作为配置中心地址,选择spring.cloud.nacos.discovery.server-addr值
         file-extension: yaml #指定yml格式的配置
@@ -18,6 +15,9 @@ spring:
         # 共享配置的DataId，多个使用，分隔
         # 越靠后，优先级越高
         # .yaml后缀不能少，只支持yaml/properties
-        shared-dataids: nacos-yishi-mysql.yaml,nacos-yishi-redis.yaml
-        # 哪些共享配置支持动态刷新，多个使用，分隔
-        refreshable-dataids: nacos-yishi-mysql.yaml,nacos-yishi-redis.yaml
+        shared-configs[0]:
+          -dataId: nacos-yishi-mysql.yaml
+          -refresh: true
+        shared-configs[1]:
+          -dataId: nacos-yishi-redis.yaml
+          -refresh: true

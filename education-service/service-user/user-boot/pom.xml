@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>service-user</artifactId>
+        <groupId>huangqi.education</groupId>
+        <version>3.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>user-boot</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>huangqi.education</groupId>
+            <artifactId>common-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>huangqi.education</groupId>
+            <artifactId>common-mybatis-plus</artifactId>
+        </dependency>
+
+        <!--生成接口文档-->
+        <!-- https://doc.xiaominfo.com/knife4j/documentation/get_start.html-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>huangqi.education</groupId>
+            <artifactId>teacher-api</artifactId>
+            <version>${ysjt-version}</version>
+        </dependency>
+
+        <!--        &lt;!&ndash; SpringBoot Actuator &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+        <!--        </dependency>-->
+    </dependencies>
+
+</project>
