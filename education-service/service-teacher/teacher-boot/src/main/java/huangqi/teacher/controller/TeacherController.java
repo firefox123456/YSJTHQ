@@ -1,5 +1,8 @@
 package huangqi.teacher.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import huangqi.base.result.ReturnDataFormat;
@@ -28,8 +31,10 @@ import java.util.List;
 @Slf4j
 public class TeacherController {
 
+
     @ApiOperation("接口测试")
     @GetMapping("test")
+    @SentinelResource(value = "teacher",fallbackClass = FlowException.class,blockHandlerClass = DegradeException.class)
     String test(){
         return "hello word";
     }
@@ -153,4 +158,5 @@ public class TeacherController {
         boolean b = iEduTeacherService.updateById(eduTeacher);
         return b ? ReturnDataFormat.ok() : ReturnDataFormat.error();
     }
+
 }

@@ -7,11 +7,6 @@ spring:
   application:
     name: nacos-yishi-gateway
   cloud:
-#    sentinel:
-#      datasource:
-#        ds2:
-#          nacos:
-#            dataType:
     nacos:
       config:
         server-addr: localhost:8848   #Nacos作为配置中心地址,选择spring.cloud.nacos.discovery.server-addr值
@@ -23,3 +18,4 @@ spring:
         shared-configs[1]:
           -dataId: nacos-yishi-redis.yaml
           -refresh: true
+
