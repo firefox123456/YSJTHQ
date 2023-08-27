@@ -12,6 +12,12 @@
     <artifactId>user-boot</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>huangqi.education</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
+
+
 
         <dependency>
             <groupId>huangqi.education</groupId>
@@ -32,7 +38,7 @@
 
         <dependency>
             <groupId>huangqi.education</groupId>
-            <artifactId>teacher-api</artifactId>
+            <artifactId>user-api</artifactId>
             <version>${ysjt-version}</version>
         </dependency>
 

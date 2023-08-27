@@ -20,7 +20,7 @@
     <packaging>pom</packaging>
     <!--父工程定义版本号-->
     <properties>
-        <hutool-version>5.5.8</hutool-version>
+        <hutool-version>5.8.16</hutool-version>
         <mybatis-plus-version>3.5.2</mybatis-plus-version>
         <druid-spring-boot-version>1.1.9</druid-spring-boot-version>
         <ysjt-version>3.0-SNAPSHOT</ysjt-version>

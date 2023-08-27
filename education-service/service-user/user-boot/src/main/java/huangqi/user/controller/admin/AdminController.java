@@ -1,13 +1,13 @@
 package huangqi.user.controller.admin;
 
 import huangqi.base.result.ReturnDataFormat;
+import huangqi.user.entity.admin.User;
+import huangqi.user.service.AdminLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -23,10 +23,19 @@ import java.util.HashMap;
 @Slf4j
 public class AdminController {
 
+    @Autowired
+    AdminLoginService adminLoginService;
+
+    @PostMapping("test")
+    public User test(@RequestBody User user){
+        User login = adminLoginService.login(user);
+        return login;
+    }
 
     @PostMapping("/login")
     @ApiOperation("admin登录")
-    public ReturnDataFormat login(){
+    public ReturnDataFormat login(@RequestBody User user){
+
         log.info("登录成功");
         return ReturnDataFormat.ok().data("token","admin");
     }
