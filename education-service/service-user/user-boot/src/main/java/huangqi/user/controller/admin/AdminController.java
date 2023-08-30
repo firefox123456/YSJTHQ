@@ -41,9 +41,6 @@ public class AdminController {
     @ApiOperation("admin登录")
     public ReturnDataFormat login(@RequestBody User user, HttpServletRequest request) throws LoginException {
         User login = adminLoginService.login(user);
-        if (login==null){
-            return null;
-        }
         log.info("登录成功"+login.toString());
         //生成token
         String token = JwtUtils.getJwtToken(login.getId(), login.getNickName());
