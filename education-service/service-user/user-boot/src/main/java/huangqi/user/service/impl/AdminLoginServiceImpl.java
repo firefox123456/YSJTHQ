@@ -1,6 +1,7 @@
 package huangqi.user.service.impl;
 
 import cn.hutool.core.util.DesensitizedUtil;
+import huangqi.base.exception.LoginException;
 import huangqi.user.entity.admin.User;
 import huangqi.user.mapper.AdminLoginMapper;
 import huangqi.user.service.AdminLoginService;
@@ -21,17 +22,27 @@ public class AdminLoginServiceImpl implements AdminLoginService {
     AdminLoginMapper adminLoginMapper;
 
     @Override
-    public User login(User user) {
+    public User login(User user) throws LoginException {
+        User correctUser=null;
+            //密码或者用户名为空
+            if (user.getUsername() == null || user.getPassword() == null) {
+                throw new LoginException("用户名或者密码为空！");
+            }
 
-        User correctUser = adminLoginMapper.queryByUsername(user.getUsername());
-        if (!correctUser.getPassword().equals(user.getPassword())){
-            log.info(user.toString()+" 登录失败！");
-            return null;
-        }
+            //查询不到数据
+            correctUser = adminLoginMapper.queryByUsername(user.getUsername());
+            if (correctUser == null) {
+                throw new LoginException("用户名错误，或者人员未注册");
+            }
 
-        //对密码进行数据脱敏
-        String password = DesensitizedUtil.password(correctUser.getPassword());
-        correctUser.setPassword(password);
+            //密码错误
+            if (!correctUser.getPassword().equals(user.getPassword())) {
+                throw new LoginException("用户密码错误");
+            }
+
+            //正确返回 并对密码等数据进行数据脱敏
+            String password = DesensitizedUtil.password(correctUser.getPassword());
+            correctUser.setPassword(password);
 
         return correctUser;
     }

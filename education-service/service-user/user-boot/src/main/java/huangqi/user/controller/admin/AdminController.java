@@ -1,16 +1,18 @@
 package huangqi.user.controller.admin;
 
+import huangqi.base.exception.LoginException;
 import huangqi.base.result.ReturnDataFormat;
+import huangqi.redis.utils.RedisUtils;
 import huangqi.user.entity.admin.User;
 import huangqi.user.service.AdminLoginService;
+import huangqi.web.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 后台管理用户登陆接口
@@ -28,37 +30,32 @@ public class AdminController {
     AdminLoginService adminLoginService;
 
     @Autowired
-    RedisTemplate<String,Object>redisTemplate;
-
-    @PostMapping("test")
-    public User test(@RequestBody User user){
-        User login = adminLoginService.login(user);
-        return login;
-    }
+    RedisUtils redisUtils;
+//    @PostMapping("test")
+//    public User test(@RequestBody User user){
+//        User login = adminLoginService.login(user);
+//        return login;
+//    }
 
     @PostMapping("/login")
     @ApiOperation("admin登录")
-    public ReturnDataFormat login(@RequestBody User user){
-
-        log.info("登录成功");
-        return ReturnDataFormat.ok().data("token","admin");
-    }
-
-    @GetMapping("/info")
-    @ApiOperation("用户信息")
-    public ReturnDataFormat info() {
-        return ReturnDataFormat.ok().data(new HashMap(){
-            {
-                put("roles","[admin]");
-                put("name","admin");
-                put("avatar","https://img2.baidu.com/it/u=385604385,3425222613&fm=253&fmt=auto&app=138&f=GIF?w=600&h=467");
-            }
-        });
+    public ReturnDataFormat login(@RequestBody User user, HttpServletRequest request) throws LoginException {
+        User login = adminLoginService.login(user);
+        if (login==null){
+            return null;
+        }
+        log.info("登录成功"+login.toString());
+        //生成token
+        String token = JwtUtils.getJwtToken(login.getId(), login.getNickName());
+        //redis token设置有效期为一天
+        redisUtils.set("admin-login:"+login.getId(),token,3600*24);
+        return ReturnDataFormat.ok().data("token",token).data("userInfo",login);
     }
 
     @PostMapping("/logout")
     @ApiOperation("登录退出")
-    public ReturnDataFormat logout(){
+    public ReturnDataFormat logout(@RequestBody User user){
+        redisUtils.del("admin-login:"+user.getId());
         return ReturnDataFormat.ok();
     }
 

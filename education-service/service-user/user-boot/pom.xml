@@ -17,8 +17,6 @@
             <artifactId>common-redis</artifactId>
         </dependency>
 
-
-
         <dependency>
             <groupId>huangqi.education</groupId>
             <artifactId>common-web</artifactId>

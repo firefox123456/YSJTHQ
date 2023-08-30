@@ -2,6 +2,7 @@ package huangqi.web.exception;
 
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
+import huangqi.base.exception.LoginException;
 import huangqi.base.result.ResultCode;
 import huangqi.base.result.ReturnDataFormat;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,17 @@ public class GlobalExceptionHandler{
     public ReturnDataFormat handlerDegradeException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
         log.info("{}, 熔断降级, {}", request.getRequestURI(),ex.toString());
         return ReturnDataFormat.error().message("熔断降级");
+    }
+
+    /**
+     * 登录校验失败
+     */
+    @ExceptionHandler(LoginException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ReturnDataFormat handlerLoginException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+        log.info("登录校验失败", request.getRequestURI(),ex.toString());
+        return ReturnDataFormat.error().code(ResultCode.LOGINFAIL.getCode()).message(ex.getMessage());
     }
 
 }
