@@ -31,10 +31,10 @@ public class AdminController {
 
     @Autowired
     RedisUtils redisUtils;
-//    @PostMapping("test")
-//    public User test(@RequestBody User user){
-//        User login = adminLoginService.login(user);
-//        return login;
+
+//    @GetMapping("test")
+//    public String test(){
+//        return "good";
 //    }
 
     @PostMapping("/login")
@@ -49,10 +49,13 @@ public class AdminController {
         return ReturnDataFormat.ok().data("token",token).data("userInfo",login);
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     @ApiOperation("登录退出")
-    public ReturnDataFormat logout(@RequestBody User user){
-        redisUtils.del("admin-login:"+user.getId());
+    public ReturnDataFormat logout(HttpServletRequest request){
+        String id = JwtUtils.getMemberIdByJwtToken(request);
+        if (redisUtils.hasKey("admin-login:"+id)) {
+            redisUtils.del("admin-login:"+id);
+        }
         return ReturnDataFormat.ok();
     }
 
