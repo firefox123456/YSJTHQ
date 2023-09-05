@@ -47,6 +47,7 @@ public class AdminController {
     public ReturnDataFormat login(@RequestBody User user, HttpServletRequest request) throws LoginException {
         User login = adminLoginService.login(user);
         log.info("登录成功"+login.toString());
+        //异步线程池发送邮件登陆
         asyncService.sendLoginMail(login.getMail(), request.getRemoteHost());
         //生成token
         String token = JwtUtils.getJwtToken(login.getId(), login.getUsername());
