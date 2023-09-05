@@ -1,7 +1,6 @@
-package huangqi.base.utils;
+package huangqi.web.utils;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -16,9 +15,8 @@ import java.util.Random;
  * * @date 2023/08/17 23:08
  * @since 1.0
  */
+@Slf4j
 public class IdWorker {
-
-    private static Logger LOG = LoggerFactory.getLogger(IdWorker.class);
 
     // ID生成机器的代号，机器码组成部分，可在配置文件中指明
     // 同一个datacenter下的workerId不能重复
@@ -62,7 +60,7 @@ public class IdWorker {
         }
         this.workerId = workerId;
         this.datacenterId = datacenterId;
-        LOG.warn(String.format(
+        log.info(String.format(
                 "worker starting. timestamp left shift %d, datacenter id bits %d, worker id bits %d, sequence bits %d, workerid %d %n",
                 timestampLeftShift, datacenterIdBits, workerIdBits, sequenceBits, workerId));
     }
@@ -70,7 +68,7 @@ public class IdWorker {
     public IdWorker() {
         this.datacenterId = RandomUtils.nextInt(1, 16);
         this.workerId = RandomUtils.nextInt(1, 16);
-        LOG.warn(String.format("IdWorker init. datacenterId:%d, workerId:%d", this.datacenterId, this.workerId));
+        log.warn(String.format("IdWorker init. datacenterId:%d, workerId:%d", this.datacenterId, this.workerId));
     }
 
     public synchronized long nextId() {
@@ -78,7 +76,7 @@ public class IdWorker {
 
         //时间错误
         if (timestamp < lastTimestamp) {
-            LOG.error(String.format("clock is moving backwards.  Rejecting requests until %d. %n", lastTimestamp));
+            log.error(String.format("clock is moving backwards.  Rejecting requests until %d. %n", lastTimestamp));
             throw new RuntimeException(
                     String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds",
                             lastTimestamp - timestamp));

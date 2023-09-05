@@ -15,6 +15,4 @@
         <module>user-boot</module>
         <module>user-api</module>
     </modules>
-
-
 </project>

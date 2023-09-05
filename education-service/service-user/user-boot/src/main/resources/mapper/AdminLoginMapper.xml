@@ -6,17 +6,14 @@
         <id property="id" column="id" jdbcType="CHAR"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
-        <result property="salt" column="salt" jdbcType="VARCHAR"/>
-        <result property="token" column="token" jdbcType="VARCHAR"/>
+        <result property="mail" column="mail" jdbcType="VARCHAR"/>
         <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
         <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
         <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,username,password,
-        nick_name,salt,token,
+        id,username,password,mail,
         is_deleted,gmt_create,gmt_modified
     </sql>
     <select id="queryByUsername" resultType="huangqi.user.entity.admin.User" parameterType="java.lang.String">

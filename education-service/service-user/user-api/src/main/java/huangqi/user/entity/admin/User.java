@@ -31,20 +31,10 @@ public class User implements Serializable {
     @ApiModelProperty("密码")
     private String password;
     /**
-    * 昵称
-    */
-    @ApiModelProperty("昵称")
-    private String nickName;
-    /**
-    * 用户头像
-    */
-    @ApiModelProperty("用户头像")
-    private String salt;
-    /**
-    * 用户签名
-    */
-    @ApiModelProperty("用户签名")
-    private String token;
+     * 邮箱
+     */
+    @ApiModelProperty("邮箱")
+    private String mail;
     /**
     * 逻辑删除 1（true）已删除， 0（false）未删除
     */

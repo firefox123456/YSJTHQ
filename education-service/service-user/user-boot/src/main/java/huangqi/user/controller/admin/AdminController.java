@@ -5,6 +5,7 @@ import huangqi.base.result.ReturnDataFormat;
 import huangqi.redis.utils.RedisUtils;
 import huangqi.user.entity.admin.User;
 import huangqi.user.service.AdminLoginService;
+import huangqi.user.service.AsyncService;
 import huangqi.web.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,18 +33,23 @@ public class AdminController {
     @Autowired
     RedisUtils redisUtils;
 
-//    @GetMapping("test")
-//    public String test(){
-//        return "good";
-//    }
+    @Autowired
+    AsyncService asyncService;
+
+    @GetMapping("test")
+    public String test(){
+
+        return "good";
+    }
 
     @PostMapping("/login")
     @ApiOperation("admin登录")
     public ReturnDataFormat login(@RequestBody User user, HttpServletRequest request) throws LoginException {
         User login = adminLoginService.login(user);
         log.info("登录成功"+login.toString());
+        asyncService.sendLoginMail(login.getMail(), request.getRemoteHost());
         //生成token
-        String token = JwtUtils.getJwtToken(login.getId(), login.getNickName());
+        String token = JwtUtils.getJwtToken(login.getId(), login.getUsername());
         //redis token设置有效期为一天
         redisUtils.set("admin-login:"+login.getId(),token,3600*24);
         return ReturnDataFormat.ok().data("token",token).data("userInfo",login);
