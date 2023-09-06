@@ -17,6 +17,13 @@ import lombok.Data;
 @TableName(value ="msg_log")
 @Data
 public class MsgLog implements Serializable {
+    public MsgLog(String msgId, String msg, String exchange, String routingKey) {
+        this.msgId = msgId;
+        this.msg = msg;
+        this.exchange = exchange;
+        this.routingKey = routingKey;
+    }
+
     /**
      * 消息唯一标识
      */
@@ -66,6 +73,5 @@ public class MsgLog implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    public MsgLog(String msgid, String id, String mailExchangeName, String mailRoutingKeyName) {
-    }
+
 }

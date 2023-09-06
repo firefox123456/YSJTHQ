@@ -78,12 +78,12 @@ public class AdminController {
         msgLogService.save(msgLog);
 
         CorrelationData correlationData = new CorrelationData(msgId.toString());
-        rabbitTemplate.convertAndSend(RabbitMQConfig.MAIL_EXCHANGE_NAME, RabbitMQConfig.MAIL_ROUTING_KEY_NAME,"hello world!", correlationData);// 发送消息
+        rabbitTemplate.convertAndSend(RabbitMQConfig.MAIL_EXCHANGE_NAME, RabbitMQConfig.MAIL_ROUTING_KEY_NAME,id, correlationData);// 发送消息
 
         //未使用rabbitMQ;
-        //if (redisUtils.hasKey("admin-login:"+id)) {
-        //      redisUtils.del("admin-login:"+id);
-        //}
+//        if (redisUtils.hasKey("admin-login:"+id)) {
+//              redisUtils.del("admin-login:"+id);
+//        }
         return ReturnDataFormat.ok();
     }
 

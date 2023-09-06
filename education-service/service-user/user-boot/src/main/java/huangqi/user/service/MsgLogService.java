@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import huangqi.user.entity.MsgLog;
 import huangqi.user.entity.MsgLogStatus;
 
+import java.util.Date;
+
 /**
 * @author "黄骐"
 * @description 针对表【msg_log(消息投递日志)】的数据库操作Service
@@ -11,4 +13,6 @@ import huangqi.user.entity.MsgLogStatus;
 */
 public interface MsgLogService extends IService<MsgLog> {
     void updateStatus(String msgId, MsgLogStatus deliverSuccess);
+
+    void updateTryCount(String msgId, Date nextTryTime);
 }

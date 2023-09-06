@@ -5,6 +5,8 @@ import huangqi.user.entity.MsgLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+
 /**
 * @author "黄骐"
 * @description 针对表【msg_log(消息投递日志)】的数据库操作Mapper
@@ -14,6 +16,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MsgLogMapper extends BaseMapper<MsgLog> {
     void updateStatus(@Param("msgId") String msgId, @Param("code")Integer code) ;
+//    void updateTryCount(@Param("msgId") String msgId, @Param("nextTryTime") Date nextTryTime);
 }
 
 

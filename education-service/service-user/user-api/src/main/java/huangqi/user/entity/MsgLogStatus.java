@@ -1,5 +1,6 @@
 package huangqi.user.entity;
 
+
 public enum MsgLogStatus {
 
     DELIVER_SUCCESS(1),
@@ -13,4 +14,7 @@ public enum MsgLogStatus {
 
     private Integer code;
 
+    public Integer getCode() {
+        return this.code;
+    }
 }

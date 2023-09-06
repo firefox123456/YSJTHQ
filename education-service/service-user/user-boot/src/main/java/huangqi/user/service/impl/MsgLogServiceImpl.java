@@ -5,7 +5,10 @@ import huangqi.user.entity.MsgLog;
 import huangqi.user.entity.MsgLogStatus;
 import huangqi.user.service.MsgLogService;
 import huangqi.user.mapper.MsgLogMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
 * @author "黄骐"
@@ -15,8 +18,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class MsgLogServiceImpl extends ServiceImpl<MsgLogMapper, MsgLog> implements MsgLogService{
 
+    @Autowired
+    MsgLogMapper msgLogMapper;
+
+
     @Override
     public void updateStatus(String msgId, MsgLogStatus deliverSuccess) {
+        msgLogMapper.updateStatus(msgId,deliverSuccess.getCode());
+    }
+
+    @Override
+    public void updateTryCount(String msgId, Date nextTryTime) {
 
     }
 }

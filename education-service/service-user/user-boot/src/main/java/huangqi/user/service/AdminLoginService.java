@@ -9,4 +9,5 @@ public interface AdminLoginService {
 
     User login( User user) throws LoginException;
 
+    User queryUserByID(String id);
 }

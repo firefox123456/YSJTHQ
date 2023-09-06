@@ -46,4 +46,12 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
         return correctUser;
     }
+
+    @Override
+    public User queryUserByID(String id) {
+        User user = adminLoginMapper.queryById(id);
+        return user;
+    }
+
+
 }
