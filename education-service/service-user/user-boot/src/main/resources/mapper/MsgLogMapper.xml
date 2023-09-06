@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="huangqi.user.mapper.MsgLogMapper">
+
+    <resultMap id="BaseResultMap" type="huangqi.user.entity.MsgLog">
+            <id property="msgId" column="msg_id" jdbcType="VARCHAR"/>
+            <result property="msg" column="msg" jdbcType="VARCHAR"/>
+            <result property="exchange" column="exchange" jdbcType="VARCHAR"/>
+            <result property="routingKey" column="routing_key" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="tryCount" column="try_count" jdbcType="INTEGER"/>
+            <result property="nextTryTime" column="next_try_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        msg_id,msg,exchange,
+        routing_key,status,try_count,
+        next_try_time,create_time,update_time
+    </sql>
+    <update id="updateStatus" parameterType="java.lang.Integer">
+        UPDATE msg_log
+        <set>
+            status=#{code}
+        </set>
+        <where>
+            msg_id=#{msgId}
+        </where>
+    </update>
+
+</mapper>
